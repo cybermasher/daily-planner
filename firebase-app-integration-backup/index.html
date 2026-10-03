@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10231a">
-<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <title>Daily Drill Planner</title>
@@ -142,15 +142,11 @@ const today=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4)
 function tpl(){data={theme:'Build • Create • Live',date:today(),dayStart:420,energy:'High',phases:PH.map(([title,sub])=>({id:uid(),title,sub,items:[]}))};
  TPL.forEach(([title,dur,type,p,note])=>data.phases[p].items.push({id:uid(),title,dur,type,note,fixed:null}))}
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const sid=v=>String(v||'').replace(/[^\w-]/g,'')||uid();
-const clean=d=>{const ds=d.dayStart;d.dayStart=ds!=null&&ds!==''&&Number.isFinite(+ds)?+ds:420;d.theme=String(d.theme??'');
- d.energy=['High','Good','Low','Recovery'].includes(d.energy)?d.energy:'High';d.date=/^\d{4}-\d{2}-\d{2}$/.test(d.date)?d.date:today();d.u=+d.u||0;
- d.phases=d.phases.filter(Boolean).map(p=>({id:sid(p.id),title:String(p.title??''),sub:String(p.sub??''),items:(Array.isArray(p.items)?p.items:[]).filter(Boolean).map(i=>({id:sid(i.id),title:String(i.title??''),note:String(i.note??''),dur:Math.max(5,Math.round(+i.dur)||30),type:Object.hasOwn(TYPES,i.type)?i.type:'thinking',fixed:i.fixed!=null&&i.fixed!==''&&Number.isFinite(+i.fixed)?+i.fixed:null}))}));return d};
 const fmt=m=>{m=((Math.round(m)%1440)+1440)%1440;const h=Math.floor(m/60);return`${h%12||12}:${String(m%60).padStart(2,'0')} ${h<12?'AM':'PM'}`};
 const dur=m=>m>=60?`${Math.floor(m/60)}h${m%60?' '+m%60+'m':''}`:`${m}m`;
 function parseT(s){const m=String(s).trim().toLowerCase().replace(/\./g,'').match(/^(\d{1,2})(?::?(\d{2}))?\s*([ap])?m?$/);if(!m)return null;
  let h=+m[1],mm=+(m[2]||0);if(mm>59||h>24)return null;
- if(m[3]){if(h>12||h<1)return null;h=h%12+(m[3]==='p'?12:0)}else if(h>=1&&h<=6)h+=12;
+ if(m[3]){if(h>12||h<1)return null;h=h%12+(m[3]==='p'?12:0)}else if(h<=6||h===12)h=h===12?12:h+12;
  return(h%24)*60+mm}
 function layout(){let t=data.dayStart;const L=new Map();data.phases.forEach(p=>p.items.forEach(i=>{const s=i.fixed!=null?i.fixed:t;L.set(i.id,{s,e:s+i.dur,over:s<t&&i.fixed!=null});t=s+i.dur}));return L}
 const lget=d=>{try{const x=JSON.parse(localStorage.getItem(LK+d));return x&&x.phases?x:null}catch(e){return null}};
@@ -162,7 +158,7 @@ function setDate(nd){if(!nd||nd===data.date){fill();return}
  if(pushT){clearTimeout(pushT);pushT=0;send()}
  let nx=lget(nd);if(!nx){nx=JSON.parse(JSON.stringify(data));nx.date=nd;nx.u=0;nx.phases.forEach(p=>{p.id=uid();p.items.forEach(i=>i.id=uid())})}
  data=nx;lset();load()}
-const shift=n=>{const d=new Date(data.date+'T12:00:00');d.setDate(d.getDate()+n);setDate(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`)};
+const shift=n=>{const d=new Date(data.date+'T12:00:00');d.setDate(d.getDate()+n);setDate(d.toISOString().slice(0,10))};
 function render(focusId,skip){
  const L=layout(),now=data.date===today()?new Date().getHours()*60+new Date().getMinutes():-1,all=data.phases.flatMap(p=>p.items);
  $('board').innerHTML=data.phases.map(p=>{
@@ -185,8 +181,8 @@ $('dstart').onchange=e=>{const m=parseT(e.target.value);if(m!=null)data.dayStart
 // board edits
 const board=$('board');
 board.addEventListener('focusout',e=>{const f=e.target.dataset&&e.target.dataset.f;if(!f)return;const v=e.target.textContent.trim();
- if(f==='ptitle'||f==='psub'){const p=data.phases.find(x=>x.id===e.target.closest('.phase').dataset.pid);if(!p)return;p[f==='ptitle'?'title':'sub']=v}
- else{const[i]=findItem(e.target.closest('.card').dataset.id);if(!i)return;i[f]=v}save()});
+ if(f==='ptitle'||f==='psub'){const p=data.phases.find(x=>x.id===e.target.closest('.phase').dataset.pid);p[f==='ptitle'?'title':'sub']=v}
+ else{const[i]=findItem(e.target.closest('.card').dataset.id);i[f]=v}save()});
 board.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.isContentEditable){e.preventDefault();e.target.blur()}});
 document.addEventListener('paste',e=>{if(e.target.isContentEditable){e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain').replace(/\n/g,' '))}});
 board.addEventListener('change',e=>{const c=e.target.closest('.card');if(!c)return;const[i]=findItem(c.dataset.id),t=e.target;
@@ -204,10 +200,10 @@ $('addPhase').onclick=()=>{const p={id:uid(),title:'New phase',sub:'',items:[]};
 $('reset').onclick=()=>{if(confirm('Replace today with the default template?')){stash('Template restored');const s=snap,dd=data.date;tpl();data.date=dd;load();save();snap=s}};
 $('exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download=`daily-drill-${data.date}.json`;a.click();URL.revokeObjectURL(a.href)};
 $('imp').onclick=()=>$('file').click();
-$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d||!Array.isArray(d.phases)||!d.phases.length)throw 0;
+$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d.phases)throw 0;
  if(d.phases.some(p=>p.items.some(i=>typeof i.start==='string'))){const mins=s=>{const[h,m]=s.split(':');return+h*60+ +m};
   d.dayStart=Math.min(...d.phases.flatMap(p=>p.items.map(i=>mins(i.start))));d.phases.forEach(p=>{p.items.sort((a,b)=>a.start.localeCompare(b.start));p.items.forEach(i=>{i.fixed=mins(i.start);delete i.start})})}
- clean(d);data=d;load();save()}catch(err){alert('That file is not a valid Daily Drill Planner export.')}};r.readAsText(f);e.target.value=''};
+ d.phases.forEach(p=>p.items.forEach(i=>{i.id=i.id||uid();i.fixed=i.fixed??null}));d.date=d.date||today();data=d;load();save()}catch(err){alert('That file is not a valid Daily Drill Planner export.')}};r.readAsText(f);e.target.value=''};
 
 // ---- fluid pointer drag ----
 let D=null;
@@ -232,7 +228,7 @@ function up(){removeEventListener('pointermove',mv);removeEventListener('pointer
  const id=card.dataset.id,changed=data.phases.flatMap(p=>p.items.map(i=>i.id)).join()!==D.before||false;
  if(changed){items.get(id).fixed=null}document.body.classList.remove('dragging');D=null;render();flush();
  const n=document.querySelector(`[data-id="${id}"]`);if(n)n.classList.add('settle')}
-setInterval(()=>{if(!busy())render(null,true)},60000);
+setInterval(()=>{if(!D&&!document.activeElement.isContentEditable&&document.activeElement.tagName!=='INPUT')render(null,true)},60000);
 // ---- Firebase sync (optional; app works fully offline/local without it) ----
 const DEV=(()=>{let d=localStorage.getItem('ddp-dev');if(!d){d=uid();localStorage.setItem('ddp-dev',d)}return d})();
 let FB=null,user=null,unsub=null,pend=null,pushT=0;
@@ -250,12 +246,12 @@ function watch(){if(unsub){unsub();unsub=null}if(!FB||!user)return;
   if(r.u>lu)applyRemote(r.d);else if(r.u<lu&&!cache)push();else if(!cache)status('ok')},
   e=>{console.warn(e);notice('Sync blocked. Check your Firestore rules.');status('off')})}
 const busy=()=>{const a=document.activeElement;return !!D||!!(a&&a!==document.body&&(a.isContentEditable||/INPUT|SELECT/.test(a.tagName)))};
-function applyRemote(d){if(!d||!Array.isArray(d.phases)||(d.date&&d.date!==data.date))return;if(busy()){pend=d;return}data=clean(d);lset();fill();render(null,true);status('ok')}
+function applyRemote(d){if(busy()){pend=d;return}data=d;lset();fill();render(null,true);status('ok')}
 function flush(){if(pend&&!busy()){const p=pend;pend=null;if((p.u||0)>(data.u||0))applyRemote(p)}}
 addEventListener('focusout',()=>setTimeout(flush,60));
 addEventListener('online',()=>{refresh();if(user)push()});addEventListener('offline',refresh);
 // auth dialog
-const dlg=$('dlg'),nice=e=>({'auth/invalid-credential':'Wrong email or password.','auth/invalid-email':'Enter a valid email.','auth/email-already-in-use':'That email already has an account. Use Sign in.','auth/weak-password':'Use at least 6 characters.','auth/popup-closed-by-user':'','auth/missing-password':'Enter your password.','auth/too-many-requests':'Too many attempts. Try again in a few minutes.','auth/network-request-failed':'Network error. Check your connection.'}[e.code]??e.message);
+const dlg=$('dlg'),nice=e=>({'auth/invalid-credential':'Wrong email or password.','auth/invalid-email':'Enter a valid email.','auth/email-already-in-use':'That email already has an account. Use Sign in.','auth/weak-password':'Use at least 6 characters.','auth/popup-closed-by-user':'','auth/missing-password':'Enter your password.'}[e.code]??e.message);
 async function cred(up){const{Au,auth}=FB;try{const em=$('aEmail').value.trim(),pw=$('aPw').value;await(up?Au.createUserWithEmailAndPassword:Au.signInWithEmailAndPassword)(auth,em,pw);dlg.close()}catch(e){$('aerr').textContent=nice(e)}}
 $('aIn').onclick=()=>cred(false);$('aUp').onclick=()=>cred(true);$('aX').onclick=()=>dlg.close();
 $('aPw').onkeydown=e=>{if(e.key==='Enter')cred(false)};

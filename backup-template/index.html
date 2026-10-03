@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10231a">
-<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <title>Daily Drill Planner</title>
@@ -24,7 +24,7 @@ button,input,select{font:inherit;color:inherit}button{cursor:pointer}
 .tools{display:flex;gap:8px;flex-wrap:wrap}
 .btn{border:1px solid rgba(255,255,255,.22);background:transparent;color:#e6efe9;border-radius:8px;padding:8px 13px;font-weight:500;transition:background .15s}
 .btn:hover{background:rgba(255,255,255,.1)}.btn.pri{background:#fff;color:var(--turf);border-color:#fff}.btn.pri:hover{background:#e3efe7}
-.fields{display:grid;grid-template-columns:1fr 220px 150px 150px;gap:10px;margin-top:20px}
+.fields{display:grid;grid-template-columns:1fr 170px 150px 150px;gap:10px;margin-top:20px}
 .fld{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 12px}
 .fld span{display:block;color:#a9bdb1;font-size:12px}
 .fld input,.fld select{width:100%;border:0;outline:0;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:2px 0;color-scheme:dark}
@@ -75,14 +75,6 @@ main{max-width:1440px;margin:auto;padding:10px 20px 60px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--turf);color:#fff;border-radius:10px;padding:10px 14px;display:none;gap:14px;align-items:center;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 .toast button{background:transparent;border:0;color:#7ee0ab;font-weight:600}
 body.dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
-.pill{margin-top:10px;display:inline-flex;align-items:center;gap:7px;border:0;background:rgba(255,255,255,.1);color:#d6e4db;border-radius:99px;padding:3px 11px;font-size:12px}
-.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:#8aa095}.pill[data-s=ok]::before{background:#4ade80}.pill[data-s=busy]::before{background:#facc15}.pill[data-s=off]::before{background:#f87171}.pill[data-s=out]{cursor:pointer}
-.dr{display:flex;align-items:center}.dr input{flex:1;min-width:0}.dr button{background:transparent;border:0;color:#fff;font-size:20px;line-height:1;padding:0 7px;border-radius:6px}.dr button:hover{background:rgba(255,255,255,.12)}
-dialog{border:0;border-radius:14px;padding:22px;width:min(380px,92vw);color:var(--ink)}dialog::backdrop{background:rgba(10,20,15,.55)}
-dialog h2{font:700 26px var(--disp);margin:0 0 4px}dialog p{margin:0 0 12px;color:var(--mut);font-size:14px}
-dialog input{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin-bottom:8px}
-.arow{display:flex;gap:8px}.b2{flex:1;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px;font-weight:500;margin-top:8px;width:100%}.b2.p{background:var(--turf);color:#fff;border-color:var(--turf)}.b2.c{border:0;color:var(--mut)}
-dialog .aerr{color:#b91c1c;min-height:1.2em;margin:0}
 @media(max-width:1000px){.board{grid-template-columns:repeat(2,minmax(0,1fr))}.fields{grid-template-columns:1fr 1fr}.fields .fld:first-child{grid-column:1/-1}}
 @media(max-width:650px){.board{grid-template-columns:1fr}.hero{padding-left:14px;padding-right:14px}main,.stats{padding-left:12px;padding-right:12px}.brand h1{font-size:28px}.tools{width:100%}.tools .btn{flex:1;padding:8px 6px}.grip{width:28px}.card{grid-template-columns:28px 88px 1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
@@ -91,28 +83,25 @@ dialog .aerr{color:#b91c1c;min-height:1.2em;margin:0}
 <body>
 <div class="hero"><div class="wrap">
  <div class="bar">
-  <div class="brand"><h1>Daily Drill Planner</h1><p>Coach the day. Protect your energy. Do the important work early.</p><button class="pill" id="sync" data-s="local">Saved on this device</button></div>
+  <div class="brand"><h1>Daily Drill Planner</h1><p>Coach the day. Protect your energy. Do the important work early.</p></div>
   <div class="tools">
-   <button class="btn" id="auth" hidden>Sign in</button><button class="btn" id="reset">Reset template</button><button class="btn" id="exp">Export</button><button class="btn" id="imp">Import</button>
+   <button class="btn" id="reset">Reset template</button><button class="btn" id="exp">Export</button><button class="btn" id="imp">Import</button>
    <button class="btn pri" id="addTop">+ Add drill</button><input id="file" type="file" accept=".json" hidden>
   </div>
  </div>
  <div class="fields">
   <label class="fld"><span>Day theme</span><input id="theme"></label>
-  <div class="fld"><span>Date</span><div class="dr"><button id="prev" aria-label="Previous day">‹</button><input id="date" type="date"><button id="next" aria-label="Next day">›</button></div></div>
+  <label class="fld"><span>Date</span><input id="date" type="date"></label>
   <label class="fld"><span>Day starts</span><input id="dstart" placeholder="7:00 AM"></label>
   <label class="fld"><span>Energy</span><select id="energy"><option>High</option><option>Good</option><option>Low</option><option>Recovery</option></select></label>
  </div>
 </div></div>
 <div class="stats" id="stats"></div>
 <main><div class="board" id="board"></div><button class="addphase" id="addPhase">+ Add phase</button></main>
-<dialog id="dlg"><h2>Sign in to sync</h2><p>Use the same account on every device and your plans follow you.</p>
-<input id="aEmail" type="email" placeholder="Email" autocomplete="email"><input id="aPw" type="password" placeholder="Password (6+ characters)" autocomplete="current-password"><p class="aerr" id="aerr"></p>
-<div class="arow"><button class="b2 p" id="aIn">Sign in</button><button class="b2" id="aUp">Create account</button></div><button class="b2" id="aG">Continue with Google</button><button class="b2 c" id="aX">Cancel</button></dialog>
 <div class="toast" id="toast"><span id="toastMsg"></span><button id="undo">Undo</button></div>
 
-<script type="module">
-const LK='ddp-v3:',OLD='daily-drill-planner-v2',$=id=>document.getElementById(id);
+<script>
+const KEY='daily-drill-planner-v2',$=id=>document.getElementById(id);
 const TYPES={thinking:'Thinking',admin:'Admin',health:'Health',creative:'Creative',fun:'Fun',rest:'Rest'};
 const uid=()=>Math.random().toString(36).slice(2,9);
 const PH=[['Prime','High-value thinking. Protect this block.'],['Build','Execution, creation, problem solving.'],['Reset','Food, movement, recovery.'],['Operations','Messages, errands, maintenance.'],['Play','Creative, social, hobbies, recreation.'],['Close','Review, prepare, unplug.']];
@@ -142,28 +131,17 @@ const today=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4)
 function tpl(){data={theme:'Build • Create • Live',date:today(),dayStart:420,energy:'High',phases:PH.map(([title,sub])=>({id:uid(),title,sub,items:[]}))};
  TPL.forEach(([title,dur,type,p,note])=>data.phases[p].items.push({id:uid(),title,dur,type,note,fixed:null}))}
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const sid=v=>String(v||'').replace(/[^\w-]/g,'')||uid();
-const clean=d=>{const ds=d.dayStart;d.dayStart=ds!=null&&ds!==''&&Number.isFinite(+ds)?+ds:420;d.theme=String(d.theme??'');
- d.energy=['High','Good','Low','Recovery'].includes(d.energy)?d.energy:'High';d.date=/^\d{4}-\d{2}-\d{2}$/.test(d.date)?d.date:today();d.u=+d.u||0;
- d.phases=d.phases.filter(Boolean).map(p=>({id:sid(p.id),title:String(p.title??''),sub:String(p.sub??''),items:(Array.isArray(p.items)?p.items:[]).filter(Boolean).map(i=>({id:sid(i.id),title:String(i.title??''),note:String(i.note??''),dur:Math.max(5,Math.round(+i.dur)||30),type:Object.hasOwn(TYPES,i.type)?i.type:'thinking',fixed:i.fixed!=null&&i.fixed!==''&&Number.isFinite(+i.fixed)?+i.fixed:null}))}));return d};
 const fmt=m=>{m=((Math.round(m)%1440)+1440)%1440;const h=Math.floor(m/60);return`${h%12||12}:${String(m%60).padStart(2,'0')} ${h<12?'AM':'PM'}`};
 const dur=m=>m>=60?`${Math.floor(m/60)}h${m%60?' '+m%60+'m':''}`:`${m}m`;
 function parseT(s){const m=String(s).trim().toLowerCase().replace(/\./g,'').match(/^(\d{1,2})(?::?(\d{2}))?\s*([ap])?m?$/);if(!m)return null;
  let h=+m[1],mm=+(m[2]||0);if(mm>59||h>24)return null;
- if(m[3]){if(h>12||h<1)return null;h=h%12+(m[3]==='p'?12:0)}else if(h>=1&&h<=6)h+=12;
+ if(m[3]){if(h>12||h<1)return null;h=h%12+(m[3]==='p'?12:0)}else if(h<=6||h===12)h=h===12?12:h+12;
  return(h%24)*60+mm}
 function layout(){let t=data.dayStart;const L=new Map();data.phases.forEach(p=>p.items.forEach(i=>{const s=i.fixed!=null?i.fixed:t;L.set(i.id,{s,e:s+i.dur,over:s<t&&i.fixed!=null});t=s+i.dur}));return L}
-const lget=d=>{try{const x=JSON.parse(localStorage.getItem(LK+d));return x&&x.phases?x:null}catch(e){return null}};
-const lset=()=>localStorage.setItem(LK+data.date,JSON.stringify(data));
-function save(){data.u=Date.now();lset();push()}
-function fill(){$('theme').value=data.theme;$('date').value=data.date;$('dstart').value=fmt(data.dayStart);$('energy').value=data.energy}
-function load(){if(!data){data=lget(today());if(!data){try{data=JSON.parse(localStorage.getItem(OLD))}catch(e){}if(!data||!data.phases)data=null}if(!data)tpl()}fill();render(null,true);watch()}
-function setDate(nd){if(!nd||nd===data.date){fill();return}
- if(pushT){clearTimeout(pushT);pushT=0;send()}
- let nx=lget(nd);if(!nx){nx=JSON.parse(JSON.stringify(data));nx.date=nd;nx.u=0;nx.phases.forEach(p=>{p.id=uid();p.items.forEach(i=>i.id=uid())})}
- data=nx;lset();load()}
-const shift=n=>{const d=new Date(data.date+'T12:00:00');d.setDate(d.getDate()+n);setDate(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`)};
-function render(focusId,skip){
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function load(){try{data=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!data||!data.phases)tpl();
+ $('theme').value=data.theme;$('date').value=data.date;$('dstart').value=fmt(data.dayStart);$('energy').value=data.energy;render()}
+function render(focusId){
  const L=layout(),now=data.date===today()?new Date().getHours()*60+new Date().getMinutes():-1,all=data.phases.flatMap(p=>p.items);
  $('board').innerHTML=data.phases.map(p=>{
   const ls=p.items.map(i=>L.get(i.id)),span=ls.length?`${fmt(ls[0].s)} – ${fmt(ls[ls.length-1].e)}`:'No drills';
@@ -173,20 +151,20 @@ function render(focusId,skip){
  const th=all.filter(i=>i.type==='thinking').reduce((s,i)=>s+i.dur,0),rs=all.filter(i=>i.type==='rest').reduce((s,i)=>s+i.dur,0),tot=all.reduce((s,i)=>s+i.dur,0),ov=[...L.values()].filter(l=>l.over).length;
  const ends=[...L.values()],last=ends.length?Math.max(...ends.map(l=>l.e)):data.dayStart;
  $('stats').innerHTML=`<span><b>${dur(th)}</b>thinking</span><span><b>${dur(rs)}</b>rest</span><span><b>${dur(tot)}</b>scheduled</span><span><b>${fmt(data.dayStart)} – ${fmt(last)}</b>day</span>${ov?`<span class="warn"><b>${ov}</b>overlap${ov>1?'s':''}</span>`:''}`;
- if(!skip)save();if(focusId){const el=document.querySelector(`[data-id="${focusId}"] .ti`);if(el){el.focus();}}
+ save();if(focusId){const el=document.querySelector(`[data-id="${focusId}"] .ti`);if(el){el.focus();}}
 }
 const findItem=id=>{for(const p of data.phases){const i=p.items.find(x=>x.id===id);if(i)return[i,p]}return[]};
-function stash(msg){snap=JSON.stringify(data);$('undo').style.display='';$('toastMsg').textContent=msg;$('toast').style.display='flex';clearTimeout(toastT);toastT=setTimeout(()=>$('toast').style.display='none',6000)}
-$('undo').onclick=()=>{if(snap){data=JSON.parse(snap);snap=null;$('toast').style.display='none';load();save()}};
+function stash(msg){snap=JSON.stringify(data);$('toastMsg').textContent=msg;$('toast').style.display='flex';clearTimeout(toastT);toastT=setTimeout(()=>$('toast').style.display='none',6000)}
+$('undo').onclick=()=>{if(snap){data=JSON.parse(snap);snap=null;$('toast').style.display='none';load()}};
 // top fields
-$('theme').oninput=e=>{data.theme=e.target.value;save()};$('date').onchange=e=>setDate(e.target.value||today());$('prev').onclick=()=>shift(-1);$('next').onclick=()=>shift(1);
+$('theme').oninput=e=>{data.theme=e.target.value;save()};$('date').onchange=e=>{data.date=e.target.value||today();render()};
 $('energy').onchange=e=>{data.energy=e.target.value;save()};
 $('dstart').onchange=e=>{const m=parseT(e.target.value);if(m!=null)data.dayStart=m;e.target.value=fmt(data.dayStart);render()};
 // board edits
 const board=$('board');
 board.addEventListener('focusout',e=>{const f=e.target.dataset&&e.target.dataset.f;if(!f)return;const v=e.target.textContent.trim();
- if(f==='ptitle'||f==='psub'){const p=data.phases.find(x=>x.id===e.target.closest('.phase').dataset.pid);if(!p)return;p[f==='ptitle'?'title':'sub']=v}
- else{const[i]=findItem(e.target.closest('.card').dataset.id);if(!i)return;i[f]=v}save()});
+ if(f==='ptitle'||f==='psub'){const p=data.phases.find(x=>x.id===e.target.closest('.phase').dataset.pid);p[f==='ptitle'?'title':'sub']=v}
+ else{const[i]=findItem(e.target.closest('.card').dataset.id);i[f]=v}save()});
 board.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.isContentEditable){e.preventDefault();e.target.blur()}});
 document.addEventListener('paste',e=>{if(e.target.isContentEditable){e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain').replace(/\n/g,' '))}});
 board.addEventListener('change',e=>{const c=e.target.closest('.card');if(!c)return;const[i]=findItem(c.dataset.id),t=e.target;
@@ -201,13 +179,13 @@ board.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)
  if(a==='delp'){if(data.phases.length<2)return;stash('Phase deleted');data.phases=data.phases.filter(x=>x.id!==ph.dataset.pid);render()}});
 $('addTop').onclick=()=>addDrill(data.phases[0].id);
 $('addPhase').onclick=()=>{const p={id:uid(),title:'New phase',sub:'',items:[]};data.phases.push(p);render();const t=document.querySelector(`[data-pid="${p.id}"] .ph-title`);t.focus();document.execCommand('selectAll')};
-$('reset').onclick=()=>{if(confirm('Replace today with the default template?')){stash('Template restored');const s=snap,dd=data.date;tpl();data.date=dd;load();save();snap=s}};
+$('reset').onclick=()=>{if(confirm('Replace today with the default template?')){stash('Template restored');const s=snap;tpl();load();snap=s}};
 $('exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download=`daily-drill-${data.date}.json`;a.click();URL.revokeObjectURL(a.href)};
 $('imp').onclick=()=>$('file').click();
-$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d||!Array.isArray(d.phases)||!d.phases.length)throw 0;
+$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d.phases)throw 0;
  if(d.phases.some(p=>p.items.some(i=>typeof i.start==='string'))){const mins=s=>{const[h,m]=s.split(':');return+h*60+ +m};
   d.dayStart=Math.min(...d.phases.flatMap(p=>p.items.map(i=>mins(i.start))));d.phases.forEach(p=>{p.items.sort((a,b)=>a.start.localeCompare(b.start));p.items.forEach(i=>{i.fixed=mins(i.start);delete i.start})})}
- clean(d);data=d;load();save()}catch(err){alert('That file is not a valid Daily Drill Planner export.')}};r.readAsText(f);e.target.value=''};
+ d.phases.forEach(p=>p.items.forEach(i=>{i.id=i.id||uid();i.fixed=i.fixed??null}));data=d;load()}catch(err){alert('That file is not a valid Daily Drill Planner export.')}};r.readAsText(f);e.target.value=''};
 
 // ---- fluid pointer drag ----
 let D=null;
@@ -230,48 +208,10 @@ function up(){removeEventListener('pointermove',mv);removeEventListener('pointer
  const items=new Map(data.phases.flatMap(p=>p.items.map(i=>[i.id,i])));
  document.querySelectorAll('.phase').forEach(s=>{data.phases.find(p=>p.id===s.dataset.pid).items=[...s.querySelectorAll('.card')].map(c=>items.get(c.dataset.id))});
  const id=card.dataset.id,changed=data.phases.flatMap(p=>p.items.map(i=>i.id)).join()!==D.before||false;
- if(changed){items.get(id).fixed=null}document.body.classList.remove('dragging');D=null;render();flush();
+ if(changed){items.get(id).fixed=null}document.body.classList.remove('dragging');D=null;render();
  const n=document.querySelector(`[data-id="${id}"]`);if(n)n.classList.add('settle')}
-setInterval(()=>{if(!busy())render(null,true)},60000);
-// ---- Firebase sync (optional; app works fully offline/local without it) ----
-const DEV=(()=>{let d=localStorage.getItem('ddp-dev');if(!d){d=uid();localStorage.setItem('ddp-dev',d)}return d})();
-let FB=null,user=null,unsub=null,pend=null,pushT=0;
-const ST={local:'Saved on this device',out:'Sign in to sync',busy:'Syncing…',ok:'Synced',off:'Offline. Will sync when back online'};
-function status(k){const b=$('sync');b.dataset.s=k;b.textContent=ST[k];b.title=user?user.email||'Signed in':''}
-const refresh=()=>status(!FB?'local':!user?'out':navigator.onLine?'ok':'off');
-function notice(m){$('toastMsg').textContent=m;$('undo').style.display='none';$('toast').style.display='flex';clearTimeout(toastT);toastT=setTimeout(()=>$('toast').style.display='none',7000)}
-const day=()=>FB.F.doc(FB.db,'users',user.uid,'days',data.date);
-function push(){if(!FB||!user)return;status(navigator.onLine?'busy':'off');clearTimeout(pushT);pushT=setTimeout(()=>{pushT=0;send()},500)}
-async function send(){if(!FB||!user)return;try{await FB.F.setDoc(day(),{d:JSON.parse(JSON.stringify(data)),u:data.u||Date.now(),by:DEV});if(navigator.onLine)status('ok')}catch(e){console.warn(e);notice('Could not sync. Check your Firestore rules.');status('off')}}
-function watch(){if(unsub){unsub();unsub=null}if(!FB||!user)return;
- unsub=FB.F.onSnapshot(day(),s=>{if(s.metadata.hasPendingWrites)return;const r=s.exists()?s.data():null,cache=s.metadata.fromCache,lu=data.u||0;
-  if(!r){if(!cache)push();return}
-  if(r.by===DEV&&r.u===lu){if(!cache&&navigator.onLine)status('ok');return}
-  if(r.u>lu)applyRemote(r.d);else if(r.u<lu&&!cache)push();else if(!cache)status('ok')},
-  e=>{console.warn(e);notice('Sync blocked. Check your Firestore rules.');status('off')})}
-const busy=()=>{const a=document.activeElement;return !!D||!!(a&&a!==document.body&&(a.isContentEditable||/INPUT|SELECT/.test(a.tagName)))};
-function applyRemote(d){if(!d||!Array.isArray(d.phases)||(d.date&&d.date!==data.date))return;if(busy()){pend=d;return}data=clean(d);lset();fill();render(null,true);status('ok')}
-function flush(){if(pend&&!busy()){const p=pend;pend=null;if((p.u||0)>(data.u||0))applyRemote(p)}}
-addEventListener('focusout',()=>setTimeout(flush,60));
-addEventListener('online',()=>{refresh();if(user)push()});addEventListener('offline',refresh);
-// auth dialog
-const dlg=$('dlg'),nice=e=>({'auth/invalid-credential':'Wrong email or password.','auth/invalid-email':'Enter a valid email.','auth/email-already-in-use':'That email already has an account. Use Sign in.','auth/weak-password':'Use at least 6 characters.','auth/popup-closed-by-user':'','auth/missing-password':'Enter your password.','auth/too-many-requests':'Too many attempts. Try again in a few minutes.','auth/network-request-failed':'Network error. Check your connection.'}[e.code]??e.message);
-async function cred(up){const{Au,auth}=FB;try{const em=$('aEmail').value.trim(),pw=$('aPw').value;await(up?Au.createUserWithEmailAndPassword:Au.signInWithEmailAndPassword)(auth,em,pw);dlg.close()}catch(e){$('aerr').textContent=nice(e)}}
-$('aIn').onclick=()=>cred(false);$('aUp').onclick=()=>cred(true);$('aX').onclick=()=>dlg.close();
-$('aPw').onkeydown=e=>{if(e.key==='Enter')cred(false)};
-$('aG').onclick=async()=>{const{Au,auth}=FB,pr=new Au.GoogleAuthProvider();try{await Au.signInWithPopup(auth,pr);dlg.close()}catch(e){if(e.code==='auth/popup-blocked'||e.code==='auth/operation-not-supported-in-this-environment')Au.signInWithRedirect(auth,pr);else $('aerr').textContent=nice(e)}};
-const openAuth=()=>{$('aerr').textContent='';dlg.showModal()};
-$('auth').onclick=()=>user?FB.Au.signOut(FB.auth):openAuth();
-$('sync').onclick=()=>{if(FB&&!user)openAuth()};
-async function initSync(){try{const{firebaseConfig:cfg}=await import('./firebase-config.js');if(!cfg||/PASTE/.test(cfg.apiKey||''))return;
- const V='https://www.gstatic.com/firebasejs/10.14.1/',[A,Au,F]=await Promise.all([import(V+'firebase-app.js'),import(V+'firebase-auth.js'),import(V+'firebase-firestore.js')]);
- const app=A.initializeApp(cfg),auth=Au.getAuth(app);let db;
- try{db=F.initializeFirestore(app,{localCache:F.persistentLocalCache({tabManager:F.persistentMultipleTabManager()})})}catch(e){db=F.getFirestore(app)}
- FB={Au,F,auth,db};$('auth').hidden=false;refresh();
- Au.onAuthStateChanged(auth,u=>{user=u;$('auth').textContent=u?'Sign out':'Sign in';refresh();watch();if(u)push()});
-}catch(e){console.warn('Sync unavailable',e)}}
-
+setInterval(()=>{if(!D&&!document.activeElement.isContentEditable&&document.activeElement.tagName!=='INPUT')render()},60000);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
-load();initSync();
+load();
 </script>
 </body></html>

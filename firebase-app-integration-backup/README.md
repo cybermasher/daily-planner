@@ -3,7 +3,7 @@
 Installable daily planner: timed drills in phases, drag to rearrange (times reflow automatically), 12-hour time, everything editable. Works fully offline on one device; add Firebase to sync across devices.
 
 ## Host on GitHub Pages
-Upload `index.html`, `sw.js`, `manifest.json`, `firebase-config.js`, `icon-192.png`, `icon-512.png` to a repo, then Settings > Pages > Deploy from branch > `main` / root.
+Upload `index.html`, `sw.js`, `manifest.json`, `firebase-config.js` to a repo, then Settings > Pages > Deploy from branch > `main` / root.
 
 ## Turn on cross-device sync (Firebase, free Spark plan)
 1. Firebase console: create a project, then add a **Web app** and copy its config into `firebase-config.js`.
