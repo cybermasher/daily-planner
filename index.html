@@ -70,7 +70,7 @@ main{max-width:1440px;margin:auto;padding:10px 20px 60px}
 .card.settle{animation:settle .22s ease-out}@keyframes settle{from{transform:scale(1.03)}to{transform:none}}
 .addbtn{width:100%;margin-top:8px;border:1px dashed color-mix(in srgb,var(--mut) 55%,transparent);background:transparent;color:var(--mut);border-radius:10px;padding:8px}
 .addbtn:hover{background:var(--hov);color:var(--ink)}
-.cards:empty::before{content:"Nothing here yet. Add a drill or drop one in.";color:#8a958d;font-size:13px;text-align:center;padding:16px 8px}
+.cards:empty::before{content:"Nothing here yet. Add a task or drop one in.";color:#8a958d;font-size:13px;text-align:center;padding:16px 8px}
 .addphase{margin-top:16px;width:100%;border:1px dashed color-mix(in srgb,var(--mut) 55%,transparent);background:transparent;border-radius:12px;padding:12px;color:var(--mut)}
 .addphase:hover{background:var(--panel);color:var(--ink)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--turf);color:#fff;border-radius:10px;padding:10px 14px;display:none;gap:14px;align-items:center;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.25)}
@@ -125,7 +125,7 @@ dialog.sheet[open]{display:flex;animation:slide .22s ease-out}dialog.sheet h2{ma
 <div class="hero"><div class="wrap">
  <div class="bar">
   <div class="brand"><h1>Daily Planner</h1><p>Coach the day. Protect your energy. Do the important work early.</p><button class="pill" id="sync" data-s="local">Saved on this device</button></div>
-  <div class="tools"><button class="btn" id="startT">▶ Start timer</button><button class="btn pri" id="addTop">+ Add drill</button><button class="btn ic" id="gear" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div>
+  <div class="tools"><button class="btn" id="startT">▶ Start timer</button><button class="btn pri" id="addTop">+ Add task</button><button class="btn ic" id="gear" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div>
  </div>
  <div class="fields">
   <label class="fld"><span>Day theme</span><input id="theme"></label>
@@ -140,17 +140,17 @@ dialog.sheet[open]{display:flex;animation:slide .22s ease-out}dialog.sheet h2{ma
 <input id="aEmail" type="email" placeholder="Email" autocomplete="email"><input id="aPw" type="password" placeholder="Password (6+ characters)" autocomplete="current-password"><p class="aerr" id="aerr"></p>
 <div class="arow"><button class="b2 p" id="aIn">Sign in</button><button class="b2" id="aUp">Create account</button></div><button class="b2" id="aG">Continue with Google</button><button class="b2 c" id="aX">Cancel</button></dialog>
 <div class="dock" id="dock" hidden><div class="dk-info"><span id="dkMode">Now</span><b id="dkTitle"></b></div><div class="dk-time" id="dkTime">0:00</div>
-<div class="dk-btns"><button id="dkPlay" aria-label="Pause">⏸</button><button id="dkNext" aria-label="Skip to next drill">⏭</button><button id="dkStop" aria-label="Stop timer">■</button></div><div class="dk-bar"><i id="dkFill"></i></div></div>
+<div class="dk-btns"><button id="dkPlay" aria-label="Pause">⏸</button><button id="dkNext" aria-label="Skip to next task">⏭</button><button id="dkStop" aria-label="Stop timer">■</button></div><div class="dk-bar"><i id="dkFill"></i></div></div>
 <dialog id="set" class="sheet" aria-label="Settings"><div class="sh-h"><h2>Settings</h2><button class="iconb" id="setX" aria-label="Close settings">×</button></div><div class="sh-b">
 <h3>Appearance</h3>
 <div class="row"><div><b>Theme</b><small>Match your device or choose one</small></div><div class="seg"><label><input type="radio" name="theme" value="system">Auto</label><label><input type="radio" name="theme" value="light">Light</label><label><input type="radio" name="theme" value="dark">Dark</label></div></div>
 <h3>Timer</h3>
-<div class="row"><div><b>Pomodoro intervals</b><small>Split each drill into focus and break cycles</small></div><label class="sw"><input type="checkbox" data-s="pomo" aria-label="Pomodoro intervals"><i></i></label></div>
+<div class="row"><div><b>Pomodoro intervals</b><small>Split each task into focus and break cycles</small></div><label class="sw"><input type="checkbox" data-s="pomo" aria-label="Pomodoro intervals"><i></i></label></div>
 <div class="row sub"><b>Focus length</b><span><input type="number" data-s="focus" min="1" max="180" aria-label="Focus minutes"> min</span></div>
 <div class="row sub"><b>Break length</b><span><input type="number" data-s="brk" min="1" max="180" aria-label="Break minutes"> min</span></div>
-<div class="row"><div><b>Auto-start next drill</b><small>When a drill ends, begin the next one</small></div><label class="sw"><input type="checkbox" data-s="auto" aria-label="Auto-start next drill"><i></i></label></div>
+<div class="row"><div><b>Auto-start next task</b><small>When a task ends, begin the next one</small></div><label class="sw"><input type="checkbox" data-s="auto" aria-label="Auto-start next task"><i></i></label></div>
 <h3>Sounds</h3>
-<div class="row"><div><b>Next activity</b><small>Plays when a drill ends</small></div><span class="pv"><select data-s="sndNext" aria-label="Next activity sound"></select><button class="b2 inl" data-pv="sndNext" aria-label="Preview">▶</button></span></div>
+<div class="row"><div><b>Next activity</b><small>Plays when a task ends</small></div><span class="pv"><select data-s="sndNext" aria-label="Next activity sound"></select><button class="b2 inl" data-pv="sndNext" aria-label="Preview">▶</button></span></div>
 <div class="row"><div><b>Focus / break switch</b><small>Pomodoro only</small></div><span class="pv"><select data-s="sndBreak" aria-label="Break sound"></select><button class="b2 inl" data-pv="sndBreak" aria-label="Preview">▶</button></span></div>
 <div class="row"><b>Volume</b><input type="range" min="0" max="1" step=".05" data-s="vol" aria-label="Volume"></div>
 <div class="row"><div><b>Vibrate</b><small>On phones that support it</small></div><label class="sw"><input type="checkbox" data-s="vib" aria-label="Vibrate"><i></i></label></div>
@@ -180,7 +180,7 @@ const TPL=[
 ['Lunch and a real break',60,'rest',2,'No guilt. Actually disengage.'],
 ['Movement, outside, reset',30,'health',2,'Change state before the second half.'],
 ['Operations: smaller important tasks',45,'admin',3,'Keep cognitive load moderate.'],
-['Flexible drill: follow the day’s priority',45,'thinking',3,'Overflow, errands, or a second push.'],
+['Flexible task: follow the day’s priority',45,'thinking',3,'Overflow, errands, or a second push.'],
 ['Life admin: chores, appointments, inbox',30,'admin',3,'Close loops.'],
 ['Fun: hobby, sport, gaming, tinkering',60,'fun',4,'Enjoy it without pretending it is work.'],
 ['Social, outdoors, unstructured time',45,'fun',4,'Leave room for spontaneity.'],
@@ -214,10 +214,10 @@ const shift=n=>{const d=new Date(data.date+'T12:00:00');d.setDate(d.getDate()+n)
 function render(focusId,skip){
  const L=layout(),now=data.date===today()?new Date().getHours()*60+new Date().getMinutes():-1,all=data.phases.flatMap(p=>p.items);
  $('board').innerHTML=data.phases.map(p=>{
-  const ls=p.items.map(i=>L.get(i.id)),span=ls.length?`${fmt(ls[0].s)} – ${fmt(ls[ls.length-1].e)}`:'No drills';
+  const ls=p.items.map(i=>L.get(i.id)),span=ls.length?`${fmt(ls[0].s)} – ${fmt(ls[ls.length-1].e)}`:'No tasks';
   return`<section class="phase" data-pid="${p.id}"><div class="ph-head"><div class="pgrip" title="Drag to reorder phase" aria-label="Drag to reorder phase"></div><div style="min-width:0;flex:1"><div class="ph-title" contenteditable="true" data-f="ptitle" data-ph="Phase name">${esc(p.title)}</div><div class="ph-sub" contenteditable="true" data-f="psub" data-ph="What is this phase for?">${esc(p.sub)}</div><div class="ph-meta">${span}${p.items.length?' • '+dur(p.items.reduce((s,i)=>s+i.dur,0)):''}</div></div><button class="iconb" data-act="delp" title="Delete phase" aria-label="Delete phase">×</button></div>
-  <div class="cards">${p.items.map(i=>{const l=L.get(i.id);return`<article class="card${l.over?' over':''}${l.s<=now&&now<l.e?' now':''}" data-id="${i.id}" style="--c:var(--${i.type})"><div class="grip" title="Drag to move" aria-label="Drag to move"></div><div class="tm"><input class="t" value="${fmt(l.s)}" aria-label="Start time"><span class="end">${l.s<=now&&now<l.e?'<b class="now-tag">Now</b>':''}to ${fmt(l.e)}</span></div><div class="bd"><div class="ti" contenteditable="true" data-f="title" data-ph="Name this drill">${esc(i.title)}</div><div class="no" contenteditable="true" data-f="note" data-ph="Add a coach’s note">${esc(i.note)}</div><div class="ft"><select class="ty" aria-label="Type">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}"${k===i.type?' selected':''}>${v}</option>`).join('')}</select><label class="du"><input class="d" type="number" min="5" step="5" value="${i.dur}" aria-label="Minutes"> min</label><button class="play" data-act="play" title="Start timer on this drill" aria-label="Start timer">▶</button>${i.fixed!=null?'<button class="pin" data-act="unpin" title="Pinned to this time. Click to let it follow the schedule.">Pinned ×</button>':''}<button class="x" data-act="del" aria-label="Delete drill">×</button></div></div></article>`}).join('')}</div>
-  <button class="addbtn" data-act="add">+ Add drill</button></section>`}).join('');
+  <div class="cards">${p.items.map(i=>{const l=L.get(i.id);return`<article class="card${l.over?' over':''}${l.s<=now&&now<l.e?' now':''}" data-id="${i.id}" style="--c:var(--${i.type})"><div class="grip" title="Drag to move" aria-label="Drag to move"></div><div class="tm"><input class="t" value="${fmt(l.s)}" aria-label="Start time"><span class="end">${l.s<=now&&now<l.e?'<b class="now-tag">Now</b>':''}to ${fmt(l.e)}</span></div><div class="bd"><div class="ti" contenteditable="true" data-f="title" data-ph="Name this task">${esc(i.title)}</div><div class="no" contenteditable="true" data-f="note" data-ph="Add a coach’s note">${esc(i.note)}</div><div class="ft"><select class="ty" aria-label="Type">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}"${k===i.type?' selected':''}>${v}</option>`).join('')}</select><label class="du"><input class="d" type="number" min="5" step="5" value="${i.dur}" aria-label="Minutes"> min</label><button class="play" data-act="play" title="Start timer on this task" aria-label="Start timer">▶</button>${i.fixed!=null?'<button class="pin" data-act="unpin" title="Pinned to this time. Click to let it follow the schedule.">Pinned ×</button>':''}<button class="x" data-act="del" aria-label="Delete task">×</button></div></div></article>`}).join('')}</div>
+  <button class="addbtn" data-act="add">+ Add task</button></section>`}).join('');
  const th=all.filter(i=>i.type==='thinking').reduce((s,i)=>s+i.dur,0),rs=all.filter(i=>i.type==='rest').reduce((s,i)=>s+i.dur,0),tot=all.reduce((s,i)=>s+i.dur,0),ov=[...L.values()].filter(l=>l.over).length;
  const ends=[...L.values()],last=ends.length?Math.max(...ends.map(l=>l.e)):data.dayStart;
  $('stats').innerHTML=`<span><b>${dur(th)}</b>thinking</span><span><b>${dur(rs)}</b>rest</span><span><b>${dur(tot)}</b>scheduled</span><span><b>${fmt(data.dayStart)} – ${fmt(last)}</b>day</span>${ov?`<span class="warn"><b>${ov}</b>overlap${ov>1?'s':''}</span>`:''}`;
@@ -246,7 +246,7 @@ board.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)
  if(a==='add')addDrill(ph.dataset.pid);
  if(a==='play')startTimer(c.dataset.id);
  if(a==='unpin'){findItem(c.dataset.id)[0].fixed=null;render()}
- if(a==='del'){stash('Drill deleted');const[,p]=findItem(c.dataset.id);p.items=p.items.filter(x=>x.id!==c.dataset.id);render()}
+ if(a==='del'){stash('Task deleted');const[,p]=findItem(c.dataset.id);p.items=p.items.filter(x=>x.id!==c.dataset.id);render()}
  if(a==='delp'){if(data.phases.length<2)return;stash('Phase deleted');data.phases=data.phases.filter(x=>x.id!==ph.dataset.pid);render()}});
 $('addTop').onclick=()=>addDrill(data.phases[0].id);
 $('addPhase').onclick=()=>{const p={id:uid(),title:'New phase',sub:'',items:[]};data.phases.push(p);render();const t=document.querySelector(`[data-pid="${p.id}"] .ph-title`);t.focus();document.execCommand('selectAll')};
@@ -256,7 +256,7 @@ $('imp').onclick=()=>$('file').click();
 $('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d.phases)throw 0;
  if(d.phases.some(p=>p.items.some(i=>typeof i.start==='string'))){const mins=s=>{const[h,m]=s.split(':');return+h*60+ +m};
   d.dayStart=Math.min(...d.phases.flatMap(p=>p.items.map(i=>mins(i.start))));d.phases.forEach(p=>{p.items.sort((a,b)=>a.start.localeCompare(b.start));p.items.forEach(i=>{i.fixed=mins(i.start);delete i.start})})}
- d.phases.forEach(p=>p.items.forEach(i=>{i.id=i.id||uid();i.fixed=i.fixed??null}));d.date=d.date||today();data=d;load();save()}catch(err){alert('That file is not a valid Daily Drill Planner export.')}};r.readAsText(f);e.target.value=''};
+ d.phases.forEach(p=>p.items.forEach(i=>{i.id=i.id||uid();i.fixed=i.fixed??null}));d.date=d.date||today();data=d;load();save()}catch(err){alert('That file is not a valid Daily Planner export.')}};r.readAsText(f);e.target.value=''};
 
 // ---- fluid pointer drag (cards and phases) ----
 let D=null;
@@ -318,13 +318,13 @@ sheet.querySelectorAll('[data-s]').forEach(el=>{const k=el.dataset.s;if(el.type=
 sheet.querySelectorAll('[name=theme]').forEach(r=>{r.checked=r.value===S.theme;r.onchange=()=>{S.theme=r.value;saveS();applyTheme()}});
 sheet.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>play(S[b.dataset.pv]));subRows();
 $('gear').onclick=()=>sheet.showModal();$('setX').onclick=()=>sheet.close();sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.close()});
-// timer: counts down a drill's planned minutes; optional pomodoro cycles inside it
+// timer: counts down a task's planned minutes; optional pomodoro cycles inside it
 let T=null,tmr=0;
 const flat=()=>data.phases.flatMap(p=>p.items);
 const fmtT=x=>{x=Math.max(0,Math.ceil(x));const h=Math.floor(x/3600),m=Math.floor(x%3600/60),r=x%60;return`${h?h+':'+String(m).padStart(2,'0'):m}:${String(r).padStart(2,'0')}`};
 function currentId(){const all=flat();if(!all.length)return null;if(data.date===today()){const L=layout(),n=new Date(),m=n.getHours()*60+n.getMinutes(),c=all.find(i=>{const l=L.get(i.id);return l.s<=m&&m<l.e});if(c)return c.id}return all[0].id}
 function markTiming(){document.querySelectorAll('.card').forEach(c=>c.classList.toggle('timing',!!T&&c.dataset.id===T.id))}
-function startTimer(id){const[i]=id?findItem(id):[];if(!i){notice('Add a drill first, then start the timer.');return}ac();
+function startTimer(id){const[i]=id?findItem(id):[];if(!i){notice('Add a task first, then start the timer.');return}ac();
  const left=i.dur*60,pomo=S.pomo;T={id,left,total:left,pomo,running:true,last:Date.now(),seg:'focus',segLeft:pomo?Math.min(S.focus*60,left):left};
  clearInterval(tmr);tmr=setInterval(step,250);dock();markTiming()}
 function stopTimer(){clearInterval(tmr);T=null;dock();markTiming()}
@@ -333,11 +333,11 @@ function step(){if(!T||!T.running)return;const n=Date.now(),dt=(n-T.last)/1000;T
  if(T.pomo&&T.segLeft<=0){if(T.seg==='focus'){T.seg='break';T.segLeft=Math.min(S.brk*60,T.left)}else{T.seg='focus';T.segLeft=Math.min(S.focus*60,T.left)}play(S.sndBreak);buzz()}
  dock()}
 function finish(sound){const all=flat(),nx=all[all.findIndex(i=>i.id===T.id)+1];if(sound){play(S.sndNext);buzz()}
- if(nx&&(S.auto||!sound)){if(sound)notice('Up next: '+(nx.title||'Untitled drill'));startTimer(nx.id)}else{stopTimer();if(sound)notice(nx?'Drill complete.':'Day complete. Nice work.')}}
+ if(nx&&(S.auto||!sound)){if(sound)notice('Up next: '+(nx.title||'Untitled task'));startTimer(nx.id)}else{stopTimer();if(sound)notice(nx?'Task complete.':'Day complete. Nice work.')}}
 function dock(){const d=$('dock');
- if(!T){d.hidden=true;$('startT').hidden=false;document.body.classList.remove('hasdock');document.title='Daily Drill Planner';return}
+ if(!T){d.hidden=true;$('startT').hidden=false;document.body.classList.remove('hasdock');document.title='Daily Planner';return}
  const[i]=findItem(T.id);if(!i){stopTimer();return}
- const shown=T.pomo?T.segLeft:T.left,t=i.title||'Untitled drill';d.hidden=false;$('startT').hidden=true;document.body.classList.add('hasdock');
+ const shown=T.pomo?T.segLeft:T.left,t=i.title||'Untitled task';d.hidden=false;$('startT').hidden=true;document.body.classList.add('hasdock');
  $('dkMode').textContent=!T.running?'Paused':T.pomo?(T.seg==='focus'?'Focus':'Break'):'Now';$('dkTitle').textContent=t;$('dkTime').textContent=fmtT(shown);
  $('dkFill').style.width=(100*(1-T.left/T.total))+'%';$('dkPlay').textContent=T.running?'⏸':'▶';$('dkPlay').setAttribute('aria-label',T.running?'Pause':'Resume');document.title=`${fmtT(shown)} · ${t}`}
 $('startT').onclick=()=>startTimer(currentId());
