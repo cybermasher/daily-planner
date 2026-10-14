@@ -1,4 +1,4 @@
-const CACHE='daily-drill-v4';
+const CACHE='daily-drill-v5';
 const OK=['www.gstatic.com','fonts.googleapis.com','fonts.gstatic.com'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./manifest.json','./firebase-config.js'])))});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
