@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "mode": "projects",
+  "created_at": "2026-11-06T21:53:04.689912+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2769,
+      "sha256": "d395623f995bd2f10e72dc911f6b8e0a0ee3542c14ce09818dfc0a6db8da543b",
+      "mode": 436,
+      "parts": []
+    },
+    {
+      "path": "firestore.rules",
+      "bytes": 289,
+      "sha256": "c015d89799829194a3d45981a1d08557fef4466f302be466b70f62e8a1011ccd",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "icon-192.png",
+      "bytes": 951,
+      "sha256": "46e8c7e85e1521e8286ebebad752a6ba84d8aa52d5938ebec89521fb450c1b69",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "icon-512.png",
+      "bytes": 2662,
+      "sha256": "74b5ea526fb405aa8070635dc9fe52f4947289d75c74f03cf579d0b9bfa44e62",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 483,
+      "sha256": "d8f4248f83fdc9c9e0aa6e7f35b110336968cec235c11ffd10494729193321fb",
+      "mode": 436,
+      "parts": []
+    },
+    {
+      "path": "sw.js",
+      "bytes": 953,
+      "sha256": "d962d6fa9eb2c6fa5e8b2e817596f8250f36e73f72dd30bc12d07bd27ef81d6e",
+      "mode": 436,
+      "parts": []
+    },
+    {
+      "path": "firebase-app-integration-backup/README.md",
+      "bytes": 1198,
+      "sha256": "85191d8e6bef17fe39f0db45face0c8c6f9ddedc9a8b7cf8d48f2a3d4c6550a9",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "firebase-app-integration-backup/firestore.rules",
+      "bytes": 289,
+      "sha256": "c015d89799829194a3d45981a1d08557fef4466f302be466b70f62e8a1011ccd",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "firebase-app-integration-backup/manifest.json",
+      "bytes": 254,
+      "sha256": "b4b688671a2b77b06fae634cda7d07c77bce3ff5b924e09aff4bfe70bd32e11b",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "firebase-app-integration-backup/sw.js",
+      "bytes": 953,
+      "sha256": "d50d4598c7987eb94526fadb4887b1933b8b29dc49406abe8c5d1fa743a3d5c2",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "backup-template/README.md",
+      "bytes": 954,
+      "sha256": "95b305455dbadfc9d16e92a6bd738d3bbc45bc53645cfdb285afecc398ed108b",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "backup-template/index.html",
+      "bytes": 21942,
+      "sha256": "a7bb0b7e5e631ec0c4d51c808e6f32ff081769622986b99286945005c65397e1",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "backup-template/manifest.json",
+      "bytes": 254,
+      "sha256": "b4b688671a2b77b06fae634cda7d07c77bce3ff5b924e09aff4bfe70bd32e11b",
+      "mode": 420,
+      "parts": []
+    },
+    {
+      "path": "backup-template/sw.js",
+      "bytes": 635,
+      "sha256": "a098e12a8d5d4393e2ddce2179d835baeee0eaf5afe02c6bcbc60cbbf3579c65",
+      "mode": 420,
+      "parts": []
+    }
+  ],
+  "excluded": [
+    {
+      "path": "firebase-config.js",
+      "reason": "literal_credential_assignment"
+    },
+    {
+      "path": "index.html",
+      "reason": "literal_credential_assignment"
+    },
+    {
+      "path": "firebase-app-integration-backup/firebase-config.js",
+      "reason": "literal_credential_assignment"
+    },
+    {
+      "path": "firebase-app-integration-backup/index.html",
+      "reason": "literal_credential_assignment"
+    }
+  ],
+  "excluded_directories": [
+    ".git"
+  ]
+}
